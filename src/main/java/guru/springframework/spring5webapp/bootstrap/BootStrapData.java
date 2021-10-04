@@ -31,6 +31,7 @@ public class BootStrapData implements CommandLineRunner {
         authorRepository.save(mahmoud);
         bookRepository.save(myFirst);
 
+
         Author hana = new Author("Hana", "Mahmoud");
         Book art = new Book("Art", "123456789");
         hana.getBooks().add(art);
@@ -38,14 +39,25 @@ public class BootStrapData implements CommandLineRunner {
         authorRepository.save(hana);
         bookRepository.save(art);
 
-        Publisher noon = new Publisher("Maadi st", "Cairo", "Cairo", "11231");
-        Publisher alef = new Publisher("Abbas Elaqad st", "Cairo", "Cairo", "11245");
+
+        Publisher noon = new Publisher("Noon","Maadi st", "Cairo", "Cairo", "11231");
+        Publisher alef = new Publisher("Alef","Abbas Elaqad st", "Cairo", "Cairo", "11245");
+
+        noon.getBooks().add(art);
+        alef.getBooks().add(myFirst);
+
+        art.setPublisher(noon);
+        myFirst.setPublisher(alef);
+
 
         publisherRepository.save(noon);
         publisherRepository.save(alef);
 
+
         System.out.println("testing bootstrap spring");
         System.out.println("Number of current books in database:" + bookRepository.count());
         System.out.println("Number of current publishers in database:" + publisherRepository.count());
+        System.out.println("Number of books for each Publisher:");
+
     }
 }
